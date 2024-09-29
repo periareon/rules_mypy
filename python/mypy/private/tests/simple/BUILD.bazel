@@ -1,0 +1,27 @@
+load("@rules_python//python:defs.bzl", "py_library", "py_test")
+load("//python/mypy:defs.bzl", "py_mypy_test")
+
+package(default_testonly = 1)
+
+py_library(
+    name = "empty_srcs_lib",
+    srcs = [],
+)
+
+py_library(
+    name = "correct_mypy_typings",
+    srcs = ["correct_mypy_typings.py"],
+)
+
+py_test(
+    name = "correct_mypy_typings_unit_test",
+    srcs = [
+        "correct_mypy_typings.py",
+    ],
+    main = "correct_mypy_typings.py",
+)
+
+py_mypy_test(
+    name = "correct_mypy_test",
+    target = ":correct_mypy_typings",
+)

@@ -1,0 +1,7 @@
+# Python requirements for rules_mypy tests
+
+-r ../3rdparty/requirements.in
+
+black
+isort
+pylint
