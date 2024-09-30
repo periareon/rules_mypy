@@ -150,13 +150,15 @@ py_mypy_test = rule(
 )
 
 def _py_mypy_aspect_impl(target, ctx):
-    for ignore_tag in [
+    ignore_tags = [
         "no-mypy",
-        "no-lint",
         "no_lint",
         "nolint",
-    ]:
-        if ignore_tag in ctx.rule.attr.tags:
+        "nomypy",
+    ]
+    for tag in ctx.rule.attr.tags:
+        sanitized = tag.replace("-", "_").lower()
+        if sanitized in ignore_tags:
             return []
 
     srcs = _find_srcs(target, ctx)
