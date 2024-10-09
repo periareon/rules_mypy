@@ -151,7 +151,7 @@ py_mypy_test = rule(
 
 def _py_mypy_aspect_impl(target, ctx):
     ignore_tags = [
-        "no-mypy",
+        "no_mypy",
         "no_lint",
         "nolint",
         "nomypy",
@@ -201,7 +201,7 @@ def _py_mypy_aspect_impl(target, ctx):
 
     ctx.actions.run(
         mnemonic = "Mypy",
-        progress_message = "Mypy {}".format(target.label),
+        progress_message = "Mypy %{label}",
         executable = executable,
         inputs = depset([ctx.file._config], transitive = [srcs]),
         tools = runfiles.files,
